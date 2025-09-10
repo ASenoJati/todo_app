@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/pages/LoginPage.dart'; 
+import 'package:get/get.dart';
+import 'package:todo_app/routes/pages.dart';
+import 'package:todo_app/routes/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false, 
-      home: Loginpage(), 
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.loginPage,
+      getPages: AppPages.pages,
     );
   }
 }
