@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+class DateHelper {
+  static String formatTanggal(String inputDate) {
+    DateTime dateTime = DateTime.parse(inputDate);
+    return DateFormat("d MMMM yyyy", "id_ID").format(dateTime);
+  }
+}
 
 class CTodoCard extends StatelessWidget {
   final String title;
   final String description;
   final String category;
   final bool isDone;
+  final String? date;
   final VoidCallback? onDone;
 
   const CTodoCard({
@@ -14,6 +23,7 @@ class CTodoCard extends StatelessWidget {
     required this.category,
     required this.isDone,
     this.onDone,
+    this.date,
   });
 
   @override
@@ -25,9 +35,12 @@ class CTodoCard extends StatelessWidget {
           title,
           style: TextStyle(
             decoration: isDone ? TextDecoration.lineThrough : null,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: Text("$description • $category"),
+        subtitle: Text(
+          "$description • $category ${date != null ? '• ${DateHelper.formatTanggal(date!)}' : ''}",
+        ),
         trailing: isDone
             ? const Icon(Icons.check_circle, color: Colors.green)
             : IconButton(

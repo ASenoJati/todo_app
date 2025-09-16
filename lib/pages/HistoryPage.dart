@@ -5,8 +5,7 @@ import 'package:todo_app/controllers/TodoController.dart';
 
 class HistoryPage extends StatelessWidget {
   HistoryPage({super.key});
-
-  final TodoController todoController = Get.find<TodoController>();
+  final TodoController todoController = Get.find();
 
   @override
   Widget build(BuildContext context) {

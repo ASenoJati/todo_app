@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/components/CTodoCard.dart';
 import 'package:todo_app/controllers/TodoController.dart';
-import 'package:todo_app/pages/AddTodoPage.dart';
+import 'package:todo_app/routes/routes.dart';
 
 class TodoPage extends StatelessWidget {
   TodoPage({super.key});
-  final todoController = Get.find<TodoController>();
+  final TodoController todoController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,7 @@ class TodoPage extends StatelessWidget {
               description: todo.description,
               category: todo.category,
               isDone: todo.isDone,
+              date: todo.date,
               onDone: () {
                 todoController.markAsDone(todoController.todos.indexOf(todo));
               },
@@ -32,7 +33,7 @@ class TodoPage extends StatelessWidget {
         );
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.to(() => AddTodoPage()),
+        onPressed: () => Get.toNamed(AppRoutes.addTodoPage),
         child: const Icon(Icons.add),
       ),
     );
