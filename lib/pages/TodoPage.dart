@@ -25,6 +25,7 @@ class TodoPage extends StatelessWidget {
               category: todo.category,
               isDone: todo.isDone,
               date: todo.date,
+              dueDate: todo.dueDate,
               onDone: () {
                 todoController.markAsDone(todoController.todos.indexOf(todo));
               },
