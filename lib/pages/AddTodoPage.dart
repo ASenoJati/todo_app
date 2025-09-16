@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/controllers/TodoController.dart';
 
 class AddTodoPage extends StatelessWidget {
@@ -9,6 +10,9 @@ class AddTodoPage extends StatelessWidget {
   final descController = TextEditingController();
   final categoryList = ["Sekolah", "Pekerjaan", "Pribadi"];
   final RxString selectedCategory = "Sekolah".obs;
+  final String dateNow = DateFormat(
+    'dd MMM yyyy, HH:mm',
+  ).format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +61,18 @@ class AddTodoPage extends StatelessWidget {
                 onPressed: () {
                   if (titleController.text.isNotEmpty &&
                       descController.text.isNotEmpty) {
-                    // 👉 Tambah ke controller
+                    final String dateNow = DateFormat(
+                      'dd MMM yyyy, HH:mm',
+                    ).format(DateTime.now());
+
                     todoController.addTodo(
                       titleController.text,
                       descController.text,
                       selectedCategory.value,
+                      dateNow,
                     );
 
-                    Get.back(); // Balik ke TodoListPage
+                    Get.back();
                     Get.snackbar("Sukses", "Tugas berhasil ditambahkan");
                   } else {
                     Get.snackbar("Error", "Judul & Deskripsi harus diisi");

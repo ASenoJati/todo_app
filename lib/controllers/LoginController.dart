@@ -13,8 +13,6 @@ class LoginController extends GetxController {
         passwordController.text == "admin") {
       isLoggedIn.value = true;
       Get.snackbar("Success", "Login berhasil");
-
-      // Redirect ke TodoPage lewat route name
       Get.offNamed(AppRoutes.homePage);
     } else {
       Get.snackbar("Error", "Username / Password salah");
