@@ -6,6 +6,7 @@ class Todo {
   String category;
   bool isDone;
   String? date;
+  String? dueDate;
 
   Todo({
     required this.title,
@@ -13,19 +14,27 @@ class Todo {
     required this.category,
     this.isDone = false,
     required this.date,
+    required this.dueDate,
   });
 }
 
 class TodoController extends GetxController {
   var todos = <Todo>[].obs;
 
-  void addTodo(String title, String description, String category, String date) {
+  void addTodo(
+    String title,
+    String description,
+    String category,
+    String date,
+    String dueDate,
+  ) {
     todos.add(
       Todo(
         title: title,
         description: description,
         category: category,
-        date: DateTime.now().toString(),
+        date: date,
+        dueDate: dueDate,
       ),
     );
   }

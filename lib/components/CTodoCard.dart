@@ -1,12 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-
-class DateHelper {
-  static String formatTanggal(String inputDate) {
-    DateTime dateTime = DateTime.parse(inputDate);
-    return DateFormat("d MMMM yyyy", "id_ID").format(dateTime);
-  }
-}
 
 class CTodoCard extends StatelessWidget {
   final String title;
@@ -14,6 +6,7 @@ class CTodoCard extends StatelessWidget {
   final String category;
   final bool isDone;
   final String? date;
+  final String? dueDate;
   final VoidCallback? onDone;
 
   const CTodoCard({
@@ -24,6 +17,7 @@ class CTodoCard extends StatelessWidget {
     required this.isDone,
     this.onDone,
     this.date,
+    this.dueDate,
   });
 
   @override
@@ -39,7 +33,7 @@ class CTodoCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          "$description • $category ${date != null ? '• ${DateHelper.formatTanggal(date!)}' : ''}",
+          "$description\nKategori: $category\nTanggal: ${date != null ? date! : '-'}\nDue Date: ${dueDate != null ? dueDate! : '-'}",
         ),
         trailing: isDone
             ? const Icon(Icons.check_circle, color: Colors.green)
