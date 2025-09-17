@@ -11,13 +11,10 @@ class ProfilePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Profile"),
-        titleTextStyle: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.bold
-        ),
+        titleTextStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
-        elevation: 0,        
+        elevation: 0,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -42,9 +39,11 @@ class ProfilePage extends StatelessWidget {
                 color: Colors.black87,
               ),
             ),
+
             const SizedBox(height: 5),
+
             const Text(
-              "murty@example.com",
+              "arkan@ui.com",
               style: TextStyle(fontSize: 16, color: Colors.black54),
             ),
 
@@ -60,13 +59,19 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
                     const ListTile(
-                      leading: Icon(Icons.home, color: Color.fromARGB(255, 9, 74, 153)),
+                      leading: Icon(
+                        Icons.home,
+                        color: Color.fromARGB(255, 9, 74, 153),
+                      ),
                       title: Text("School"),
                       subtitle: Text("SMK RADEN UMAR SAID"),
                     ),
                     const Divider(),
                     const ListTile(
-                      leading: Icon(Icons.info, color: Color.fromARGB(255, 9, 74, 153)),
+                      leading: Icon(
+                        Icons.info,
+                        color: Color.fromARGB(255, 9, 74, 153),
+                      ),
                       title: Text("About Me"),
                       subtitle: Text("Mobile Development Flutter Project"),
                     ),
@@ -74,8 +79,21 @@ class ProfilePage extends StatelessWidget {
                       myText: "Log Out",
                       myTextColor: Colors.white,
                       onPressed: () {
-                        Get.snackbar("Log Out", "You have been logged out");
-                        Get.offAllNamed('/login');
+                        Get.defaultDialog(
+                          title: "Konfirmasi",
+                          middleText: "Apakah kamu yakin ingin log out?",
+                          textCancel: "Tidak",
+                          textConfirm: "Ya",
+                          confirmTextColor: Colors.white,
+                          onConfirm: () {
+                            Get.back();
+                            Get.snackbar(
+                              "Log Out",
+                              "Apakah yakin anda ingin log out",
+                            );
+                            Get.offAllNamed('/login');
+                          },
+                        );
                       },
                     ),
                   ],

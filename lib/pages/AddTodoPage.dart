@@ -12,34 +12,54 @@ class AddTodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tambah Todo")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+      appBar: AppBar(
+        title: const Text("Tambah Todo"),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
               controller: controller.titleController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: "Judul",
-                border: OutlineInputBorder(),
+                hintText: "Masukkan judul tugas",
+                prefixIcon: const Icon(Icons.title),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
+
             TextField(
               controller: controller.descController,
-              decoration: const InputDecoration(
+              maxLines: 3,
+              decoration: InputDecoration(
                 labelText: "Deskripsi",
-                border: OutlineInputBorder(),
+                hintText: "Tuliskan detail tugas",
+                alignLabelWithHint: true,
+                prefixIcon: const Icon(Icons.description),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
+
             Obx(
               () => DropdownButtonFormField<String>(
                 value: controller.selectedCategory.value,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: "Kategori",
-                  border: OutlineInputBorder(),
+                  prefixIcon: const Icon(Icons.category),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
                 items: controller.categoryList
                     .map((c) => DropdownMenuItem(value: c, child: Text(c)))
@@ -49,39 +69,71 @@ class AddTodoPage extends StatelessWidget {
                 },
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
+
             Obx(() {
               final dateText = controller.selectedDate.value == null
-                  ? "Pilih tanggal"
+                  ? "Pilih Tanggal Dibuat"
                   : DateFormat(
                       "d MMMM yyyy",
                       "id_ID",
                     ).format(controller.selectedDate.value!);
               return OutlinedButton.icon(
-                icon: const Icon(Icons.date_range),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 14,
+                    horizontal: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                icon: const Icon(Icons.event),
                 label: Text(dateText),
                 onPressed: () => controller.pickDate(context),
               );
             }),
+            const SizedBox(height: 12),
 
             Obx(() {
               final dateText = controller.selectedDueDate.value == null
-                  ? "Pilih tanggal"
+                  ? "Pilih Tanggal Batas"
                   : DateFormat(
                       "d MMMM yyyy",
                       "id_ID",
                     ).format(controller.selectedDueDate.value!);
               return OutlinedButton.icon(
-                icon: const Icon(Icons.date_range),
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 14,
+                    horizontal: 16,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                icon: const Icon(Icons.schedule),
                 label: Text(dateText),
                 onPressed: () => controller.pickDueDate(context),
               );
             }),
+            const SizedBox(height: 28),
 
-            const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,
-              child: ElevatedButton(
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueAccent,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                ),
+                icon: const Icon(Icons.save, color: Colors.white),
+                label: const Text(
+                  "Simpan",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
                 onPressed: () {
                   if (controller.titleController.text.isNotEmpty &&
                       controller.descController.text.isNotEmpty &&
@@ -105,15 +157,14 @@ class AddTodoPage extends StatelessWidget {
                     );
 
                     Get.back();
-                    Get.snackbar("Sukses", "Tugas berhasil ditambahkan");
+                    Get.snackbar("Sukses", "Task berhasil ditambahkan");
                   } else {
                     Get.snackbar(
                       "Error",
-                      "Judul, Deskripsi & Tanggal harus diisi",
+                      "Task, Deskripsi & Tanggal semua harus diisi",
                     );
                   }
                 },
-                child: const Text("Simpan"),
               ),
             ),
           ],

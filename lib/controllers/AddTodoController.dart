@@ -8,8 +8,8 @@ class AddTodoController extends GetxController {
   final titleController = TextEditingController();
   final descController = TextEditingController();
 
-  final categoryList = ["Sekolah", "Pekerjaan", "Pribadi"];
-  final selectedCategory = "Sekolah".obs;
+  final categoryList = ["Urgent", "High", "Normal", "Low"];
+  final selectedCategory = "Urgent".obs;
 
   final selectedDate = Rx<DateTime?>(null);
 
