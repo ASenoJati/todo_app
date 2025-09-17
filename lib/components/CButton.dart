@@ -18,7 +18,7 @@ class CButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(myText, style: TextStyle(color: myTextColor)),
       style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.brown[800],
+        backgroundColor: Colors.blue,
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),

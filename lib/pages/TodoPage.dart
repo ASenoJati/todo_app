@@ -11,6 +11,19 @@ class TodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      appBar: AppBar(
+        title: const Text("To Do List"),
+        titleTextStyle: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold,    
+        
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+        elevation: 0,
+      ),
+    
       body: Obx(() {
         if (todoController.activeTodos.isEmpty) {
           return const Center(child: Text("Belum ada Tugas"));
@@ -29,13 +42,16 @@ class TodoPage extends StatelessWidget {
               onDone: () {
                 todoController.markAsDone(todoController.todos.indexOf(todo));
               },
+              onDelete: () {
+                todoController.deleteTodo(index);
+              },
             );
           },
         );
       }),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed(AppRoutes.addTodoPage),
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, color: Color(0xFF448AFF),),
       ),
     );
   }
