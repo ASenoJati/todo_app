@@ -4,6 +4,7 @@ import 'package:todo_app/controllers/HomeController.dart';
 import 'package:todo_app/pages/HistoryPage.dart';
 import 'package:todo_app/pages/ProfilePage.dart';
 import 'package:todo_app/pages/TodoPage.dart';
+import 'package:todo_app/components/CColor.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -22,9 +23,9 @@ class HomePage extends StatelessWidget {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: controller.currentIndex.value,
           onTap: controller.changeTab,
-          backgroundColor: Colors.blueAccent,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white70,
+          backgroundColor: AppColors.blue,
+          selectedItemColor: AppColors.white,
+          unselectedItemColor: AppColors.white,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.sports),

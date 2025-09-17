@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:todo_app/components/CButton.dart';
 import 'package:todo_app/components/CTextField.dart';
 import 'package:todo_app/controllers/LoginController.dart';
+import 'package:todo_app/components/CColor.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
@@ -10,18 +11,18 @@ class LoginPage extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: AppColors.lightblue,
       body: Center(
         child: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(24.0),
             margin: const EdgeInsets.symmetric(horizontal: 20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black26,
+                  color: AppColors.black,
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),
@@ -36,13 +37,13 @@ class LoginPage extends GetView<LoginController> {
                   style: TextStyle(
                     fontSize: 26,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 23, 101, 164),
+                    color: AppColors.lightblue,
                   ),
                 ),
                 const SizedBox(height: 3),
                 const Text(
                   "Login Untuk Melanjutkan",
-                  style: TextStyle(color: Colors.black54),
+                  style: TextStyle(color: AppColors.black),
                 ),
 
                 SizedBox(height: 10),
@@ -51,12 +52,12 @@ class LoginPage extends GetView<LoginController> {
                   controller: controller.usernameController,
                   label: 'Username',
                   obscureText: false,
-                  labelColor: Colors.black,
+                  labelColor: AppColors.black,
                   pass: false,
                   isNumber: false,
                   borderRadius: 20.0,
                   borderWidht: 18,
-                  bordercolor: Colors.black,
+                  bordercolor: AppColors.black,
                 ),
 
                 SizedBox(height: 10.0),
@@ -65,19 +66,19 @@ class LoginPage extends GetView<LoginController> {
                   controller: controller.passwordController,
                   label: 'Password',
                   obscureText: true,
-                  labelColor: Colors.black,
+                  labelColor: AppColors.black,
                   pass: false,
                   isNumber: false,
                   borderRadius: 20.0,
                   borderWidht: 18,
-                  bordercolor: Colors.black,
+                  bordercolor: AppColors.black,
                 ),
 
                 const SizedBox(height: 24.0),
 
                 CButton(
                   myText: 'Login',
-                  myTextColor: const Color.fromARGB(255, 255, 255, 255),
+                  myTextColor: AppColors.white,
                   onPressed: controller.login,
                 ),
               ],

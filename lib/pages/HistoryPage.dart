@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/components/CTodoCard.dart';
 import 'package:todo_app/controllers/TodoController.dart';
+import 'package:todo_app/components/CColor.dart';
 
 class HistoryPage extends StatelessWidget {
   HistoryPage({super.key});
@@ -14,7 +15,7 @@ class HistoryPage extends StatelessWidget {
         title: const Text("History"),
         titleTextStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: AppColors.lightblue,
         elevation: 0,
       ),
 

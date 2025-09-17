@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/components/CButton.dart';
+import 'package:todo_app/components/CColor.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -8,12 +9,12 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         title: const Text("Profile"),
         titleTextStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: AppColors.lightblue,
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -23,7 +24,7 @@ class ProfilePage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundColor: const Color.fromARGB(255, 9, 74, 153),
+              backgroundColor: AppColors.blue,
               child: const CircleAvatar(
                 radius: 55,
                 backgroundImage: AssetImage('image/photoprofil.png'),
@@ -36,7 +37,7 @@ class ProfilePage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: AppColors.black,
               ),
             ),
 
@@ -44,7 +45,7 @@ class ProfilePage extends StatelessWidget {
 
             const Text(
               "arkan@ui.com",
-              style: TextStyle(fontSize: 16, color: Colors.black54),
+              style: TextStyle(fontSize: 16, color: AppColors.black),
             ),
 
             const SizedBox(height: 20),
@@ -61,7 +62,7 @@ class ProfilePage extends StatelessWidget {
                     const ListTile(
                       leading: Icon(
                         Icons.home,
-                        color: Color.fromARGB(255, 9, 74, 153),
+                        color: AppColors.darkblue,
                       ),
                       title: Text("School"),
                       subtitle: Text("SMK RADEN UMAR SAID"),
@@ -70,21 +71,21 @@ class ProfilePage extends StatelessWidget {
                     const ListTile(
                       leading: Icon(
                         Icons.info,
-                        color: Color.fromARGB(255, 9, 74, 153),
+                        color: AppColors.darkblue,
                       ),
                       title: Text("About Me"),
                       subtitle: Text("Mobile Development Flutter Project"),
                     ),
                     CButton(
                       myText: "Log Out",
-                      myTextColor: Colors.white,
+                      myTextColor: AppColors.white,
                       onPressed: () {
                         Get.defaultDialog(
                           title: "Konfirmasi",
                           middleText: "Apakah kamu yakin ingin log out?",
                           textCancel: "Tidak",
                           textConfirm: "Ya",
-                          confirmTextColor: Colors.white,
+                          confirmTextColor: AppColors.white,
                           onConfirm: () {
                             Get.back();
                             Get.snackbar(

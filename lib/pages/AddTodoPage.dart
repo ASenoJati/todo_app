@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/controllers/AddTodoController.dart';
 import 'package:todo_app/controllers/TodoController.dart';
+import 'package:todo_app/components/CColor.dart';
 
 class AddTodoPage extends StatelessWidget {
   AddTodoPage({super.key});
@@ -15,7 +16,7 @@ class AddTodoPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Tambah Todo"),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: AppColors.lightblue,
         elevation: 0,
       ),
       body: SingleChildScrollView(
@@ -123,13 +124,13 @@ class AddTodoPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: AppColors.blue,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                icon: const Icon(Icons.save, color: Colors.white),
+                icon: const Icon(Icons.save, color: AppColors.white),
                 label: const Text(
                   "Simpan",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
