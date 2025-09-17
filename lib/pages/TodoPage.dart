@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:todo_app/components/CTodoCard.dart';
 import 'package:todo_app/controllers/TodoController.dart';
 import 'package:todo_app/routes/routes.dart';
+import 'package:todo_app/components/CColor.dart';
 
 class TodoPage extends StatelessWidget {
   TodoPage({super.key});
@@ -15,7 +16,7 @@ class TodoPage extends StatelessWidget {
         title: const Text("To Do List"),
         titleTextStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         centerTitle: true,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: AppColors.lightblue,
         elevation: 0,
       ),
 
@@ -47,7 +48,7 @@ class TodoPage extends StatelessWidget {
                   middleText: "Apakah kamu yakin ingin menghapus data ini?",
                   textCancel: "Tidak",
                   textConfirm: "Ya",
-                  confirmTextColor: Colors.white,
+                  confirmTextColor: AppColors.white,
                   onConfirm: () {
                     todoController.deleteTodo(realIndex);
                     Get.back();
@@ -62,7 +63,7 @@ class TodoPage extends StatelessWidget {
 
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed(AppRoutes.addTodoPage),
-        child: const Icon(Icons.add, color: Color(0xFF448AFF)),
+        child: const Icon(Icons.add, color: AppColors.mediumblue),
       ),
     );
   }
