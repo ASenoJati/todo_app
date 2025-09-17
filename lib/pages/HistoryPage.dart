@@ -9,7 +9,21 @@ class HistoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("History"),
+        titleTextStyle: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.blueAccent,
+        elevation: 0,        
+
+      ),
+
+       body: Obx(    
+      () {
       if (todoController.history.isEmpty) {
         return Center(child: Text("Belum ada todo selesai"));
       }
@@ -22,9 +36,14 @@ class HistoryPage extends StatelessWidget {
             description: todo.description,
             category: todo.category,
             isDone: true,
+            onDelete: () {
+              todoController.deleteTodo(index);
+            },
           );
         },
       );
-    });
+    })
+    );
+   
   }
 }

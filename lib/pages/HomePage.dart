@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: controller.currentIndex.value,
           onTap: controller.changeTab,
-          backgroundColor: Colors.brown[800],
+          backgroundColor: Colors.blueAccent,
           selectedItemColor: Colors.white,
           unselectedItemColor: Colors.white70,
           items: const [

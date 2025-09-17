@@ -8,6 +8,7 @@ class CTodoCard extends StatelessWidget {
   final String? date;
   final String? dueDate;
   final VoidCallback? onDone;
+  final VoidCallback? onDelete;
 
   const CTodoCard({
     super.key,
@@ -16,6 +17,7 @@ class CTodoCard extends StatelessWidget {
     required this.category,
     required this.isDone,
     this.onDone,
+    this.onDelete,
     this.date,
     this.dueDate,
   });
@@ -35,12 +37,23 @@ class CTodoCard extends StatelessWidget {
         subtitle: Text(
           "$description\nKategori: $category\nTanggal: ${date != null ? date! : '-'}\nDue Date: ${dueDate != null ? dueDate! : '-'}",
         ),
-        trailing: isDone
-            ? const Icon(Icons.check_circle, color: Colors.green)
-            : IconButton(
-                icon: const Icon(Icons.check, color: Colors.grey),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (isDone)
+              const Icon(Icons.check_circle, color: Colors.green)
+            else
+              IconButton(
+                icon: const Icon(Icons.check, color: Colors.grey,),
                 onPressed: onDone,
               ),
+              IconButton(
+                icon: const Icon(Icons.delete, color: Colors.red),
+                onPressed: onDelete,
+              )
+          ],
+        )
+              
       ),
     );
   }

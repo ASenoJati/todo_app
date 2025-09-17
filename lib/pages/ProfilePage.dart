@@ -10,10 +10,14 @@ class ProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.brown[800],
-        title: const Text("Profile", style: TextStyle(color: Colors.white)),
+        title: const Text("Profile"),
+        titleTextStyle: TextStyle(
+          fontSize: 28,
+          fontWeight: FontWeight.bold
+        ),
         centerTitle: true,
-        elevation: 0,
+        backgroundColor: Colors.blueAccent,
+        elevation: 0,        
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
@@ -22,10 +26,10 @@ class ProfilePage extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 60,
-              backgroundColor: Colors.brown[800],
+              backgroundColor: const Color.fromARGB(255, 9, 74, 153),
               child: const CircleAvatar(
                 radius: 55,
-                backgroundImage: AssetImage('images/LogoSMK.png'),
+                backgroundImage: AssetImage('image/photoprofil.png'),
               ),
             ),
             const SizedBox(height: 15),
@@ -56,13 +60,13 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
                     const ListTile(
-                      leading: Icon(Icons.home, color: Colors.brown),
+                      leading: Icon(Icons.home, color: Color.fromARGB(255, 9, 74, 153)),
                       title: Text("School"),
                       subtitle: Text("SMK RADEN UMAR SAID"),
                     ),
                     const Divider(),
                     const ListTile(
-                      leading: Icon(Icons.info, color: Colors.brown),
+                      leading: Icon(Icons.info, color: Color.fromARGB(255, 9, 74, 153)),
                       title: Text("About Me"),
                       subtitle: Text("Mobile Development Flutter Project"),
                     ),

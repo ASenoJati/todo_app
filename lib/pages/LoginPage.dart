@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:todo_app/components/CButton.dart';
 import 'package:todo_app/components/CTextField.dart';
 import 'package:todo_app/controllers/LoginController.dart';
+import 'package:todo_app/components/CColor.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});
@@ -11,58 +12,95 @@ class LoginPage extends GetView<LoginController> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(title: const Text('Login'), centerTitle: true),
+    backgroundColor:Colors.blue ,
       body: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              CTextfield(
-                controller: controller.usernameController,
-                label: 'Username',
-                labelColor: Colors.black,
-                pass: false,
-                isNumber: false,
-                borderRadius: 20.0,
-                borderWidht: 18,
-                bordercolor: Colors.black,
+          child: Container(
+              padding: const EdgeInsets.all(24.0),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 10,
+                    offset: const Offset(0, 4),
+                  )
+                ],
               ),
 
-              SizedBox(height: 10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text(
+                      "Todo List Application",
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 23, 101, 164),
+                        
+                      ),
+                    ),
+                    const SizedBox(height: 3),
+                    const Text(
+                      "Login Untuk Melanjutkan",
+                      style: TextStyle(color: Colors.black54),
+                    ),
 
-              CTextfield(
-                controller: controller.passwordController,
-                label: 'Password',
-                labelColor: Colors.black,
-                pass: false,
-                isNumber: false,
-                borderRadius: 20.0,
-                borderWidht: 18,
-                bordercolor: Colors.black,
-              ),
+                    SizedBox(height: 10),
 
-              const SizedBox(height: 24.0),
 
-              CButton(
-                myText: 'Login',
-                myTextColor: Colors.blue,
-                onPressed: controller.login,
-              ),
+                    CTextfield(
+                      controller: controller.usernameController,
+                      label: 'Username',
+                      obscureText: false,
+                      labelColor: Colors.black,
+                      pass: false,
+                      isNumber: false,
+                      borderRadius: 20.0,
+                      borderWidht: 18,
+                      bordercolor: Colors.black,
+                    ),
 
-              const SizedBox(height: 16.0),
+                    SizedBox(height: 10.0),
 
-              TextButton(
-                onPressed: () {
-                  print('Register clicked');
-                  //  Navigator.pushNamed(context, "/register");
-                },
-                child: const Text(
-                  'Belum punya akun? Daftar Sekarang',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
+                    CTextfield(
+                      controller: controller.passwordController,
+                      label: 'Password',
+                      obscureText: true,
+                      labelColor: Colors.black,
+                      pass: false,
+                      isNumber: false,
+                      borderRadius: 20.0,
+                      borderWidht: 18,
+                      bordercolor: Colors.black,
+                    ),
+
+                    const SizedBox(height: 24.0),
+
+                    CButton(
+                      
+                      myText: 'Login',
+                      myTextColor: const Color.fromARGB(255, 255, 255, 255),
+                      onPressed: controller.login,
+                    ),
+
+                    const SizedBox(height: 16.0),
+
+                    TextButton(
+                      onPressed: () {
+                        print('Register clicked');
+                        //  Navigator.pushNamed(context, "/register");
+                      },
+                      child: const Text(
+                        'Belum punya akun? Daftar Sekarang',
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ],
+                )
+              
           ),
         ),
       ),

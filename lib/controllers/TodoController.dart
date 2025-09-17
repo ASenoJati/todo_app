@@ -44,6 +44,12 @@ class TodoController extends GetxController {
     todos.refresh();
   }
 
+  void deleteTodo(int index) {
+    if (index >= 0 && index < todos.length) {
+      todos.removeAt(index);
+    }
+  }
+
   List<Todo> get activeTodos => todos.where((t) => !t.isDone).toList();
   List<Todo> get history => todos.where((t) => t.isDone).toList();
 }

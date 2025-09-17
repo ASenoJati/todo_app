@@ -7,6 +7,7 @@ class CTextfield extends StatelessWidget {
   final String label;
   final Color labelColor;
   final bool pass;
+  final bool obscureText;
   final Color? bordercolor;
   final double? borderWidht;
   final double? borderRadius;
@@ -21,6 +22,7 @@ class CTextfield extends StatelessWidget {
     required this.borderRadius,
     required this.borderWidht,
     required this.bordercolor,
+    required this.obscureText,
   });
 
   @override
@@ -29,7 +31,7 @@ class CTextfield extends StatelessWidget {
       keyboardType: isNumber ? TextInputType.number : TextInputType.text,
       inputFormatters: isNumber ? [FilteringTextInputFormatter.digitsOnly] : [],
       controller: controller,
-      obscureText: pass,
+      obscureText: obscureText,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: TextStyle(color: labelColor),
@@ -40,7 +42,9 @@ class CTextfield extends StatelessWidget {
             width: borderWidht ?? 1.0,
           ),
         ),
-        prefixIcon: isNumber ? const Icon(Icons.numbers) : const Icon(Icons.person)
+        prefixIcon: isNumber
+            ? const Icon(Icons.numbers)
+            : const Icon(Icons.person),
       ),
     );
   }
