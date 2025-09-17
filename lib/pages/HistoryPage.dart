@@ -12,38 +12,32 @@ class HistoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("History"),
-        titleTextStyle: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.bold
-        ),
+        titleTextStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
-        elevation: 0,        
-
+        elevation: 0,
       ),
 
-       body: Obx(    
-      () {
-      if (todoController.history.isEmpty) {
-        return Center(child: Text("Belum ada todo selesai"));
-      }
-      return ListView.builder(
-        itemCount: todoController.history.length,
-        itemBuilder: (context, index) {
-          final todo = todoController.history[index];
-          return CTodoCard(
-            title: todo.title,
-            description: todo.description,
-            category: todo.category,
-            isDone: true,
-            onDelete: () {
-              todoController.deleteTodo(index);
-            },
-          );
-        },
-      );
-    })
+      body: Obx(() {
+        if (todoController.history.isEmpty) {
+          return Center(child: Text("Belum Ada Task Selesai"));
+        }
+        return ListView.builder(
+          itemCount: todoController.history.length,
+          itemBuilder: (context, index) {
+            final todo = todoController.history[index];
+            return CTodoCard(
+              title: todo.title,
+              description: todo.description,
+              category: todo.category,
+              isDone: true,
+              onDelete: () {
+                todoController.deleteTodo(index);
+              },
+            );
+          },
+        );
+      }),
     );
-   
   }
 }

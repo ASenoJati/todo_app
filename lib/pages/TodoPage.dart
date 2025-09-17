@@ -11,23 +11,19 @@ class TodoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       appBar: AppBar(
         title: const Text("To Do List"),
-        titleTextStyle: TextStyle(
-          fontSize: 28,
-          fontWeight: FontWeight.bold,    
-        
-        ),
+        titleTextStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         centerTitle: true,
         backgroundColor: Colors.blueAccent,
         elevation: 0,
       ),
-    
+
       body: Obx(() {
         if (todoController.activeTodos.isEmpty) {
-          return const Center(child: Text("Belum ada Tugas"));
+          return const Center(child: Text("Belum Ada Task"));
         }
+
         return ListView.builder(
           itemCount: todoController.activeTodos.length,
           itemBuilder: (context, index) {
@@ -43,15 +39,30 @@ class TodoPage extends StatelessWidget {
                 todoController.markAsDone(todoController.todos.indexOf(todo));
               },
               onDelete: () {
-                todoController.deleteTodo(index);
+                final todo = todoController.activeTodos[index];
+                final realIndex = todoController.todos.indexOf(todo);
+
+                Get.defaultDialog(
+                  title: "Konfirmasi",
+                  middleText: "Apakah kamu yakin ingin menghapus data ini?",
+                  textCancel: "Tidak",
+                  textConfirm: "Ya",
+                  confirmTextColor: Colors.white,
+                  onConfirm: () {
+                    todoController.deleteTodo(realIndex);
+                    Get.back();
+                    Get.snackbar("Berhasil", "Task berhasil dihapus");
+                  },
+                );
               },
             );
           },
         );
       }),
+
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed(AppRoutes.addTodoPage),
-        child: const Icon(Icons.add, color: Color(0xFF448AFF),),
+        child: const Icon(Icons.add, color: Color(0xFF448AFF)),
       ),
     );
   }
