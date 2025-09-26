@@ -19,9 +19,19 @@ class HistoryPage extends StatelessWidget {
         elevation: 0,
       ),
 
-      body: Obx(() {
+      body: Stack(
+        children: [
+          Image.asset('image/background2.png',
+          fit: BoxFit.cover,
+          height: double.infinity,
+          width: double.infinity,
+          ),
+
+          
+
+           Obx(() {
         if (todoController.history.isEmpty) {
-          return Center(child: Text("Belum Ada Task Selesai"));
+          return Center(child: Text("Belum Ada Task Selesai", style: TextStyle(color: AppColors.white),));
         }
         return ListView.builder(
           itemCount: todoController.history.length,
@@ -32,6 +42,8 @@ class HistoryPage extends StatelessWidget {
               description: todo.description,
               category: todo.category,
               isDone: true,
+              date: todo.date,
+              dueDate: todo.dueDate,
               onDelete: () {
                 todoController.deleteTodo(index);
               },
@@ -39,6 +51,11 @@ class HistoryPage extends StatelessWidget {
           },
         );
       }),
+
+        ],
+      )
+      
+     
     );
   }
 }
