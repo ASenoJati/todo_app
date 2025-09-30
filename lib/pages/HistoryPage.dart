@@ -23,7 +23,7 @@ class HistoryPage extends StatelessWidget {
         children: [
           Image.asset('image/background2.png',
           fit: BoxFit.cover,
-          height: double.infinity,
+          height: double.infinity,  
           width: double.infinity,
           ),
 

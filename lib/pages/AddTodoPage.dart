@@ -6,7 +6,7 @@ import 'package:todo_app/controllers/TodoController.dart';
 import 'package:todo_app/components/CColor.dart';
 
 class AddTodoPage extends StatelessWidget {
-  AddTodoPage({super.key});
+  AddTodoPage({super.key}); 
   final TodoController todoController = Get.find();
   final controller = Get.put(AddTodoController());
 
