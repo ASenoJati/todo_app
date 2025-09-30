@@ -20,9 +20,19 @@ class TodoPage extends StatelessWidget {
         elevation: 0,
       ),
 
-      body: Obx(() {
+      body: Stack(
+        children: [
+          Image.asset('image/background2.png',
+          fit: BoxFit.cover,
+          height: double.infinity,
+          width: double.infinity,
+          ),
+
+        
+
+          Obx(() {
         if (todoController.activeTodos.isEmpty) {
-          return const Center(child: Text("Belum Ada Task"));
+          return const Center(child: Text("Belum Ada Task",style: TextStyle(color: AppColors.white),));
         }
 
         return ListView.builder(
@@ -60,6 +70,10 @@ class TodoPage extends StatelessWidget {
           },
         );
       }),
+
+        ],
+      ),
+       
 
       floatingActionButton: FloatingActionButton(
         onPressed: () => Get.toNamed(AppRoutes.addTodoPage),

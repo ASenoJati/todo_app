@@ -6,7 +6,7 @@ import 'package:todo_app/controllers/TodoController.dart';
 import 'package:todo_app/components/CColor.dart';
 
 class AddTodoPage extends StatelessWidget {
-  AddTodoPage({super.key});
+  AddTodoPage({super.key}); 
   final TodoController todoController = Get.find();
   final controller = Get.put(AddTodoController());
 
@@ -23,7 +23,11 @@ class AddTodoPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: 
+          [
+            
+           
+
             TextField(
               controller: controller.titleController,
               decoration: InputDecoration(
@@ -72,6 +76,7 @@ class AddTodoPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
+          
             Obx(() {
               final dateText = controller.selectedDate.value == null
                   ? "Pilih Tanggal Dibuat"
@@ -83,7 +88,7 @@ class AddTodoPage extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     vertical: 14,
-                    horizontal: 16,
+                    horizontal: 60,
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -106,8 +111,9 @@ class AddTodoPage extends StatelessWidget {
               return OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
+                    
                     vertical: 14,
-                    horizontal: 16,
+                    horizontal: 60,
                   ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -133,7 +139,7 @@ class AddTodoPage extends StatelessWidget {
                 icon: const Icon(Icons.save, color: AppColors.white),
                 label: const Text(
                   "Simpan",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.white),
                 ),
                 onPressed: () {
                   if (controller.titleController.text.isNotEmpty &&

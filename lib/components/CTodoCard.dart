@@ -34,26 +34,67 @@ class CTodoCard extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: Text(
-          "$description\nKategori: $category\nTanggal: ${date != null ? date! : '-'}\nDue Date: ${dueDate != null ? dueDate! : '-'}",
+
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(description),
+
+            SizedBox(height: 4),
+            // Text("kategori: $category"),
+            Row(
+              children: [
+                const Icon(Icons.category, size: 20),
+                const SizedBox(width: 4),
+                Text("$category"),
+              ],
+            ),
+            SizedBox(height: 5),
+            Row(
+              children: [
+                const Icon(Icons.event, size: 20),
+                const SizedBox(width: 4),
+                Text(date != null ? date! : '-'),
+              ],
+            ),
+
+            SizedBox(height: 5),
+
+            Row(
+              children: [
+                const Icon(Icons.schedule, size: 20),
+                const SizedBox(width: 4),
+                Text("${dueDate != null ? dueDate! : '-'}"),
+              ],
+            ),
+          ],
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (isDone)
-              const Icon(Icons.check_circle, color: Colors.green)
-            else
+            if (!isDone && onDone != null)
               IconButton(
-                icon: const Icon(Icons.check, color: Colors.grey,),
+                icon: const Icon(Icons.check, color: Colors.grey),
                 onPressed: onDone,
               ),
+
+            if (onDelete != null)
               IconButton(
                 icon: const Icon(Icons.delete, color: Colors.red),
                 onPressed: onDelete,
-              )
+              ),
+
+            // else
+            //   IconButton(
+            //     icon: const Icon(Icons.check, color: Colors.grey,),
+            //     onPressed: onDone,
+            //   ),
+            //   IconButton(
+            //     icon: const Icon(Icons.delete, color: Colors.red),
+            //     onPressed: onDelete,
+            //   )
           ],
-        )
-              
+        ),
       ),
     );
   }
