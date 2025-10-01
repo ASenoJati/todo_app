@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app/routes/routes.dart';
 
 class Splashscreencontroller extends GetxController {
@@ -12,7 +12,7 @@ class Splashscreencontroller extends GetxController {
   checkLogin() async {
     await Future.delayed(const Duration(seconds: 3));
 
-    final prefs = await SharedPreferences.getInstance;
+    final prefs = await SharedPreferences.getInstance();
 
     if (prefs.getString("username") != null) {
       Get.offAllNamed(AppRoutes.homePage);
