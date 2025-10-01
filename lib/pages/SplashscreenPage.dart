@@ -3,24 +3,21 @@ import 'package:get/get.dart';
 import 'package:todo_app/components/CColor.dart';
 import 'package:todo_app/controllers/SplashscreenController.dart';
 
-
 class Splashscreenpage extends StatelessWidget {
-  const Splashscreenpage({super.key});
+  Splashscreenpage({super.key});
+
+  final controller = Get.find<Splashscreencontroller>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold (
+    return Scaffold(
       backgroundColor: AppColors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.check_circle,
-              size: 100,
-              color: AppColors.blue,
-            ),
-            const SizedBox(height: 20,),
+            Icon(Icons.check_circle, size: 100, color: AppColors.blue),
+            const SizedBox(height: 20),
 
             Text(
               "Todo App",
@@ -36,8 +33,7 @@ class Splashscreenpage extends StatelessWidget {
             const CircularProgressIndicator(
               color: AppColors.mediumblue,
               strokeWidth: 3,
-            )
-
+            ),
           ],
         ),
       ),

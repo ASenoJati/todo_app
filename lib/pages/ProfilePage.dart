@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app/components/CButton.dart';
 import 'package:todo_app/components/CColor.dart';
+import 'package:todo_app/controllers/LoginController.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+
+  final LoginController loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
@@ -60,19 +63,13 @@ class ProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
                     const ListTile(
-                      leading: Icon(
-                        Icons.home,
-                        color: AppColors.darkblue,
-                      ),
+                      leading: Icon(Icons.home, color: AppColors.darkblue),
                       title: Text("School"),
                       subtitle: Text("SMK RADEN UMAR SAID"),
                     ),
                     const Divider(),
                     const ListTile(
-                      leading: Icon(
-                        Icons.info,
-                        color: AppColors.darkblue,
-                      ),
+                      leading: Icon(Icons.info, color: AppColors.darkblue),
                       title: Text("About Me"),
                       subtitle: Text("Mobile Development Flutter Project"),
                     ),
@@ -89,10 +86,10 @@ class ProfilePage extends StatelessWidget {
                           onConfirm: () {
                             Get.back();
                             Get.snackbar(
-                              "Log Out",
-                              "Apakah yakin anda ingin log out",
+                              "Berhasil!",
+                              "Anda telah berhasil keluar",
                             );
-                            Get.offAllNamed('/login');
+                            loginController.logout();
                           },
                         );
                       },
