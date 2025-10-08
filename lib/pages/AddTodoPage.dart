@@ -6,9 +6,23 @@ import 'package:todo_app/controllers/TodoController.dart';
 import 'package:todo_app/components/CColor.dart';
 
 class AddTodoPage extends StatelessWidget {
-  AddTodoPage({super.key}); 
+  AddTodoPage({super.key});
   final TodoController todoController = Get.find();
   final controller = Get.put(AddTodoController());
+
+  void showDangerToast(String message) {
+    Get.snackbar(
+      "Gagal",
+      message,
+      backgroundColor: Colors.redAccent,
+      colorText: Colors.white,
+      snackPosition: SnackPosition.TOP,
+      margin: const EdgeInsets.all(12),
+      borderRadius: 8,
+      icon: const Icon(Icons.error_outline, color: Colors.white),
+      duration: const Duration(seconds: 2),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +37,7 @@ class AddTodoPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: 
-          [
-            
-           
-
+          children: [
             TextField(
               controller: controller.titleController,
               decoration: InputDecoration(
@@ -76,7 +86,7 @@ class AddTodoPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
 
-          
+            // Pilih Tanggal Dibuat
             Obx(() {
               final dateText = controller.selectedDate.value == null
                   ? "Pilih Tanggal Dibuat"
@@ -101,6 +111,7 @@ class AddTodoPage extends StatelessWidget {
             }),
             const SizedBox(height: 12),
 
+            // Pilih Tanggal Batas
             Obx(() {
               final dateText = controller.selectedDueDate.value == null
                   ? "Pilih Tanggal Batas"
@@ -111,7 +122,6 @@ class AddTodoPage extends StatelessWidget {
               return OutlinedButton.icon(
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
-                    
                     vertical: 14,
                     horizontal: 60,
                   ),
@@ -126,6 +136,7 @@ class AddTodoPage extends StatelessWidget {
             }),
             const SizedBox(height: 28),
 
+            // Tombol Simpan
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
@@ -139,38 +150,59 @@ class AddTodoPage extends StatelessWidget {
                 icon: const Icon(Icons.save, color: AppColors.white),
                 label: const Text(
                   "Simpan",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: AppColors.white),
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.white,
+                  ),
                 ),
                 onPressed: () {
-                  if (controller.titleController.text.isNotEmpty &&
-                      controller.descController.text.isNotEmpty &&
-                      controller.selectedDate.value != null) {
-                    final String formattedDate = DateFormat(
-                      'dd MMM yyyy',
-                      'id_ID',
-                    ).format(controller.selectedDate.value!);
+                  final title = controller.titleController.text;
+                  final desc = controller.descController.text;
+                  final date = controller.selectedDate.value;
+                  final dueDate = controller.selectedDueDate.value;
 
-                    final String formattedDueDate = DateFormat(
-                      'dd MMM yyyy',
-                      'id_ID',
-                    ).format(controller.selectedDueDate.value!);
-
-                    todoController.addTodo(
-                      controller.titleController.text,
-                      controller.descController.text,
-                      controller.selectedCategory.value,
-                      formattedDate,
-                      formattedDueDate,
+                  if (title.isEmpty || desc.isEmpty || date == null) {
+                    showDangerToast(
+                      "Task, Deskripsi & Tanggal semua harus diisi!",
                     );
-
-                    Get.back();
-                    Get.snackbar("Sukses", "Task berhasil ditambahkan");
-                  } else {
-                    Get.snackbar(
-                      "Error",
-                      "Task, Deskripsi & Tanggal semua harus diisi",
-                    );
+                    return;
                   }
+
+                  if (dueDate != null && dueDate.isBefore(date)) {
+                    showDangerToast(
+                      "Tanggal batas harus setelah tanggal dibuat!",
+                    );
+                    return;
+                  }
+
+                  final String formattedDate = DateFormat(
+                    'dd MMM yyyy',
+                    'id_ID',
+                  ).format(date);
+                  final String formattedDueDate = dueDate != null
+                      ? DateFormat('dd MMM yyyy', 'id_ID').format(dueDate)
+                      : '';
+
+                  todoController.addTodo(
+                    title,
+                    desc,
+                    controller.selectedCategory.value,
+                    formattedDate,
+                    formattedDueDate,
+                  );
+
+                  Get.back();
+                  Get.snackbar(
+                    "Sukses",
+                    "Task berhasil ditambahkan",
+                    backgroundColor: Colors.green,
+                    colorText: Colors.white,
+                    snackPosition: SnackPosition.BOTTOM,
+                    margin: const EdgeInsets.all(12),
+                    borderRadius: 8,
+                    duration: const Duration(seconds: 2),
+                  );
                 },
               ),
             ),
