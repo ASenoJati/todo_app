@@ -12,6 +12,7 @@ class AddTodoController extends GetxController {
   final selectedCategory = "Urgent".obs;
 
   final selectedDate = Rx<DateTime?>(null);
+  final selectedDueDate = Rx<DateTime?>(null);
 
   Future<void> pickDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -21,12 +22,8 @@ class AddTodoController extends GetxController {
       lastDate: DateTime(2100),
       locale: const Locale('id', 'ID'),
     );
-    if (picked != null) {
-      selectedDate.value = picked;
-    }
+    if (picked != null) selectedDate.value = picked;
   }
-
-  final selectedDueDate = Rx<DateTime?>(null);
 
   Future<void> pickDueDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -36,18 +33,15 @@ class AddTodoController extends GetxController {
       lastDate: DateTime(2100),
       locale: const Locale('id', 'ID'),
     );
-    if (picked != null) {
-      selectedDueDate.value = picked;
-    }
+    if (picked != null) selectedDueDate.value = picked;
   }
 
   var title = ''.obs;
   var description = ''.obs;
   var category = ''.obs;
-  var dateNow = ''.obs;
 
-  void addNewTodo() {
-    if (title.isEmpty || description.isEmpty) {
+  void addNewTodo() async {
+    if (titleController.text.isEmpty || descController.text.isEmpty) {
       Get.defaultDialog(
         title: "Error",
         middleText: "Judul dan Deskripsi tidak boleh kosong!",
@@ -55,12 +49,12 @@ class AddTodoController extends GetxController {
       return;
     }
 
-    todoController.addTodo(
-      title.value,
-      description.value,
-      category.value,
-      selectedDate.value.toString(),
-      selectedDueDate.value.toString(),
+    await todoController.addTodo(
+      titleController.text,
+      descController.text,
+      selectedCategory.value,
+      selectedDate.value?.toString() ?? DateTime.now().toString(),
+      selectedDueDate.value?.toString() ?? '',
     );
 
     Get.back();

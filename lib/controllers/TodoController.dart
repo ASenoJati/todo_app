@@ -1,53 +1,52 @@
 import 'package:get/get.dart';
-
-class Todo {
-  String title;
-  String description;
-  String category;
-  bool isDone;
-  String? date;
-  String? dueDate;
-
-  Todo({
-    required this.title,
-    required this.description,
-    required this.category,
-    this.isDone = false,
-    required this.date,
-    required this.dueDate,
-  });
-}
+import 'package:todo_app/helper/db_helper.dart';
+import 'package:todo_app/models/TodoModel.dart';
 
 class TodoController extends GetxController {
   var todos = <Todo>[].obs;
+  final dbHelper = DBHelper();
 
-  void addTodo(
+  @override
+  void onInit() {
+    super.onInit();
+    loadTodos();
+  }
+
+  Future<void> loadTodos() async {
+    final data = await dbHelper.getTodos();
+    todos.assignAll(data);
+  }
+
+  Future<void> addTodo(
     String title,
     String description,
     String category,
     String date,
     String dueDate,
-  ) {
-    todos.add(
-      Todo(
-        title: title,
-        description: description,
-        category: category,
-        date: date,
-        dueDate: dueDate,
-      ),
+  ) async {
+    final todo = Todo(
+      title: title,
+      description: description,
+      category: category,
+      date: date,
+      dueDate: dueDate,
     );
+
+    await dbHelper.insertTodo(todo);
+    await loadTodos();
   }
 
-  void markAsDone(int index) {
-    todos[index].isDone = true;
-    todos.refresh();
+  Future<void> markAsDone(int index) async {
+    final todo = todos[index];
+    todo.isDone = true;
+    await dbHelper.updateTodoStatus(todo.id!, true);
+    await loadTodos();
   }
 
-  void deleteTodo(int index) {
-    if (index >= 0 && index < todos.length) {
-      todos.removeAt(index);
-    }
+  Future<void> deleteTodo(int index) async {
+    final todo = todos[index];
+    await dbHelper.deleteTodo(todo.id!);
+    await loadTodos();
   }
 
   List<Todo> get activeTodos => todos.where((t) => !t.isDone).toList();

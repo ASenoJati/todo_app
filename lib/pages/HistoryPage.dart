@@ -21,41 +21,42 @@ class HistoryPage extends StatelessWidget {
 
       body: Stack(
         children: [
-          Image.asset('image/background2.png',
-          fit: BoxFit.cover,
-          height: double.infinity,  
-          width: double.infinity,
+          Image.asset(
+            'image/background2.png',
+            fit: BoxFit.cover,
+            height: double.infinity,
+            width: double.infinity,
           ),
 
-          
-
-           Obx(() {
-        if (todoController.history.isEmpty) {
-          return Center(child: Text("Belum Ada Task Selesai", style: TextStyle(color: AppColors.white),));
-        }
-        return ListView.builder(
-          itemCount: todoController.history.length,
-          itemBuilder: (context, index) {
-            final todo = todoController.history[index];
-            return CTodoCard(
-              title: todo.title,
-              description: todo.description,
-              category: todo.category,
-              isDone: true,
-              date: todo.date,
-              dueDate: todo.dueDate,
-              onDelete: () {
-                todoController.deleteTodo(index);
+          Obx(() {
+            if (todoController.history.isEmpty) {
+              return Center(
+                child: Text(
+                  "Belum Ada Task Selesai",
+                  style: TextStyle(color: AppColors.white),
+                ),
+              );
+            }
+            return ListView.builder(
+              itemCount: todoController.history.length,
+              itemBuilder: (context, index) {
+                final todo = todoController.history[index];
+                return CTodoCard(
+                  title: todo.title,
+                  description: todo.description,
+                  category: todo.category,
+                  isDone: true,
+                  date: todo.date,
+                  dueDate: todo.dueDate,
+                  onDelete: () {
+                    todoController.deleteTodo(index);
+                  },
+                );
               },
             );
-          },
-        );
-      }),
-
+          }),
         ],
-      )
-      
-     
+      ),
     );
   }
 }
