@@ -9,7 +9,10 @@ class ResponsiveUtils {
     return MediaQuery.of(context).size.height * percentage;
   }
 
-  static double getResponsiveFontSize(BuildContext context, double baseFontSize) {
+  static double getResponsiveFontSize(
+    BuildContext context,
+    double baseFontSize,
+  ) {
     double width = MediaQuery.of(context).size.width;
     if (width < 360) {
       return baseFontSize * 0.85;
