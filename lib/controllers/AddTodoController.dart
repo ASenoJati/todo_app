@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_app/components/CToast.dart';
 import 'package:todo_app/controllers/TodoController.dart';
 
 class AddTodoController extends GetxController {
@@ -58,7 +59,8 @@ class AddTodoController extends GetxController {
     );
 
     Get.back();
-    Get.snackbar("Sukses", "Todo berhasil ditambahkan");
+    //Get.snackbar("Sukses", "Todo berhasil ditambahkan");
+    CToast.showSuccess("Todo berhasil ditambahkan");
   }
 
   @override

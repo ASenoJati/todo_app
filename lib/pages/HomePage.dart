@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_app/components/CColor.dart';
 import 'package:todo_app/controllers/HomeController.dart';
+import 'package:todo_app/controllers/TodoController.dart';
 import 'package:todo_app/pages/HistoryPage.dart';
 import 'package:todo_app/pages/ProfilePage.dart';
 import 'package:todo_app/pages/TodoPage.dart';
-import 'package:todo_app/components/CColor.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key});
+  final TodoController todoController = Get.find<TodoController>();
   @override
   Widget build(BuildContext context) {
     final HomeController controller = Get.find();
