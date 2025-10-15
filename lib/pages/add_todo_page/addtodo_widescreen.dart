@@ -5,10 +5,10 @@ import 'package:todo_app/components/CColor.dart';
 import 'package:todo_app/components/CToast.dart';
 import 'package:todo_app/controllers/AddTodoController.dart';
 import 'package:todo_app/controllers/TodoController.dart';
-import 'package:todo_app/helper/responsive_utils.dart';
 
 class AddtodoWidescreen extends StatelessWidget {
   AddtodoWidescreen({super.key});
+
   final TodoController todoController = Get.find();
   final controller = Get.put(AddTodoController());
 
@@ -18,16 +18,28 @@ class AddtodoWidescreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
           "Tambah Todo",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
         ),
         centerTitle: true,
         backgroundColor: AppColors.lightblue,
       ),
       body: Center(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.all(40),
           child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(20),
+            constraints: const BoxConstraints(maxWidth: 700),
+            padding: const EdgeInsets.all(32),
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.black.withOpacity(0.1),
+                  blurRadius: 10,
+                  offset: const Offset(0, 5),
+                ),
+              ],
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -42,10 +54,10 @@ class AddtodoWidescreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 TextField(
                   controller: controller.descController,
-                  maxLines: 3,
+                  maxLines: 4,
                   decoration: InputDecoration(
                     labelText: "Deskripsi",
                     hintText: "Tuliskan detail tugas",
@@ -56,7 +68,7 @@ class AddtodoWidescreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 Obx(
                   () => DropdownButtonFormField<String>(
                     value: controller.selectedCategory.value,
@@ -75,17 +87,17 @@ class AddtodoWidescreen extends StatelessWidget {
                     },
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 _buildDateButton(context, controller, true),
                 const SizedBox(height: 12),
                 _buildDateButton(context, controller, false),
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.blue,
-                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 18),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -96,6 +108,7 @@ class AddtodoWidescreen extends StatelessWidget {
                       style: TextStyle(
                         color: AppColors.white,
                         fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
                     onPressed: () => _handleSave(context),
@@ -126,20 +139,12 @@ class AddtodoWidescreen extends StatelessWidget {
       return SizedBox(
         width: double.infinity,
         child: OutlinedButton.icon(
+          icon: Icon(isStartDate ? Icons.event : Icons.schedule),
+          label: Text(dateText),
           style: OutlinedButton.styleFrom(
-            padding: EdgeInsets.symmetric(
-              vertical: ResponsiveUtils.isMobile(context) ? 14 : 18,
-              horizontal: ResponsiveUtils.isMobile(context) ? 20 : 40,
-            ),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
-            ),
-          ),
-          icon: Icon(isStartDate ? Icons.event : Icons.schedule),
-          label: Text(
-            dateText,
-            style: TextStyle(
-              fontSize: ResponsiveUtils.getResponsiveFontSize(context, 14),
             ),
           ),
           onPressed: () => isStartDate
